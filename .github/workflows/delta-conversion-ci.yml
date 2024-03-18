@@ -90,6 +90,7 @@ jobs:
           mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078
           mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078 -Dclassifier=nohive
           mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-tools -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078
+          mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078 -Dclassifier=shaded-protobuf
       - run: ./gradlew -DsparkVersions=3.5 -DscalaVersion=2.12 -DhiveVersions= -DflinkVersions= :iceberg-delta-lake:check -Pquick=true -x javadoc
       - uses: actions/upload-artifact@v4
         if: failure()
@@ -123,6 +124,7 @@ jobs:
           mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078
           mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078 -Dclassifier=nohive
           mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-tools -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078
+          mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1078 -Dclassifier=shaded-protobuf
       - run: ./gradlew -DsparkVersions=3.5 -DscalaVersion=2.13 -DhiveVersions= -DflinkVersions= :iceberg-delta-lake:check -Pquick=true -x javadoc
       - uses: actions/upload-artifact@v4
         if: failure()
