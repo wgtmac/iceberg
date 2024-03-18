@@ -83,6 +83,7 @@ jobs:
     - run: |
         mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3-SNAPSHOT -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/snapshots
         mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3-SNAPSHOT -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/snapshots -Dclassifier=nohive
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.9.3-SNAPSHOT -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/snapshots -Dclassifier=shaded-protobuf
         mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-tools -Dversion=1.9.3-SNAPSHOT -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/snapshots
     - run: ./gradlew check -DsparkVersions= -DhiveVersions= -DflinkVersions= -Pquick=true -x javadoc
     - uses: actions/upload-artifact@v4
