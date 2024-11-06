@@ -71,7 +71,11 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: ${{ runner.os }}-gradle-
     - run: echo -e "$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)\t$(hostname -f) $(hostname -s)" | sudo tee -a /etc/hosts
-    - run: ./gradlew check -DsparkVersions= -DhiveVersions= -DflinkVersions= -Pquick=true -x javadoc
+    - run: |
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085 -Dclassifier=nohive
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-tools -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085
+    - run: ./gradlew check -DsparkVersions= -DhiveVersions= -DflinkVersions= -Pquick=true -x javadoc 
     - uses: actions/upload-artifact@v3
       if: failure()
       with:
@@ -87,6 +91,11 @@ jobs:
       with:
         distribution: zulu
         java-version: 8
+    - run: |
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085 -Dclassifier=nohive
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085 -Dclassifier=shaded-protobuf
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-tools -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085
     - run: ./gradlew -DallVersions build -x test -x javadoc -x integrationTest
 
   build-javadoc:
@@ -97,4 +106,8 @@ jobs:
       with:
         distribution: zulu
         java-version: 8
+    - run: |
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085 -Dclassifier=nohive
+        mvn dependency:get -DgroupId=org.apache.orc -DartifactId=orc-core -Dversion=1.8.8 -Dpackaging=jar -D=remoteRepositories=https://repository.apache.org/content/repositories/orgapacheorc-1085 -Dclassifier=shaded-protobuf
     - run: ./gradlew -Pquick=true javadoc
